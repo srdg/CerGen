@@ -8,7 +8,7 @@ from PIL import ImageDraw
 ob=openpyxl.load_workbook('demodata.xlsx')								
 #open Worksheet
 sh1=ob.get_sheet_by_name('Form Responses 1')							
-#set font to be used in text in Image
+
 			
 for i in range(2,sh1.max_row+1):
 	#open Image file
