@@ -1,6 +1,7 @@
 import os	
 import shutil								
-import openpyxl														
+import openpyxl		
+import datetime												
 from PIL import Image													
 from PIL import ImageFont
 from PIL import ImageDraw										
@@ -8,7 +9,7 @@ from PIL import ImageDraw
 ob=openpyxl.load_workbook('demodata.xlsx')								
 #open Worksheet
 sh1=ob.get_sheet_by_name('Form Responses 1')							
-
+#set font to be used in text in Image
 			
 for i in range(2,sh1.max_row+1):
 	#open Image file
@@ -19,6 +20,10 @@ for i in range(2,sh1.max_row+1):
 	#getdata
 	name = str(sh1.cell(row=i,column=2).value).upper()
 	dept = str(sh1.cell(row=i,column=3).value).upper()
+	begi = sh1.cell(row=i,column=4).value
+	begi = begi.strftime('%m/%d/%Y')
+	endi = sh1.cell(row=i,column=5).value
+	endi = endi.strftime('%m/%d/%Y')
 	task = str(sh1.cell(row=i,column=6).value).upper()	
 	supervisor = str(sh1.cell(row=i,column=7).value).upper()	
 	HOD = str(sh1.cell(row=i,column=9).value).upper()	
@@ -30,6 +35,12 @@ for i in range(2,sh1.max_row+1):
 
 	w, h = draw.textsize(dept, font=font)
 	draw.text(((W-w)/2,1510),dept,(0,0,0),font=font)
+
+	w, h = draw.textsize(begi, font=font)
+	draw.text(((W-w)/2 - 300,1650),begi,(0,0,0),font=font)
+
+	w, h = draw.textsize(endi, font=font)
+	draw.text(((W-w)/2 + 400,1650),endi,(0,0,0),font=font)
 
 	font=ImageFont.truetype("Times New Roman.ttf",size=60)
 	w, h = draw.textsize(task, font=font)
